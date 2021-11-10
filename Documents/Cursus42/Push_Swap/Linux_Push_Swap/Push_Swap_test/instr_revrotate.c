@@ -6,7 +6,7 @@
 /*   By: iderighe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/16 11:02:30 by iderighe          #+#    #+#             */
-/*   Updated: 2021/10/21 11:23:10 by iderighe         ###   ########.fr       */
+/*   Updated: 2021/11/09 12:23:15 by iderighe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	ft_revrotate_ab(int *s_a, int *s_b, t_varlen *varlen)
 {
 	int	i;
 	int	tmp;
-
+printf("revrotate ab ?\n");
 	if (varlen->len_a <= 1 || varlen->len_b <= 1)
 		return ;
 	else

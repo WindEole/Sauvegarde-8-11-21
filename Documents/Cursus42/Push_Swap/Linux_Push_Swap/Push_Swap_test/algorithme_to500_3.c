@@ -6,7 +6,7 @@
 /*   By: iderighe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 11:32:35 by iderighe          #+#    #+#             */
-/*   Updated: 2021/11/04 13:36:01 by iderighe         ###   ########.fr       */
+/*   Updated: 2021/11/09 14:34:39 by iderighe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ while (j < varlen->len_b)
 printf(BLUE"s_b[%d] = %d"RESET"\n", j, s_b[j]);
 j++;
 }
-
 	pos_second = varlen->len_a - varlen->pos_second;
 	varlen->count = 0;
 printf("envoi de s_a[%d] = %d\n", varlen->pos_first, s_a[varlen->pos_first]);
@@ -61,6 +60,7 @@ printf(YELLOW"pos_in_b_first = %d s_a[%d] = %d s_b[%d] = %d"BLUE" pos_in_b_secon
 printf("ici ?\n");
 		if (pos_in_b_first >= varlen->pos_first && varlen->pos_first > 0)
 		{
+printf(PURPLE"pos_in_b_first >= varlen->pos_first"RESET"\n");
 			ft_loop_rotate_ab(s_a, s_b, varlen, varlen->pos_first);
 			varlen->count = varlen->pos_first;
 		}
@@ -78,13 +78,29 @@ printf(CYAN"varlen->count = %d, varlen->pos_first = %d, pos_in_b_first = %d"RESE
 	else if (varlen->pos_first > pos_second) /// on envoie pos_second vers B
 	{
 printf(GREEN"ici ?"RESET"\n");
-		if (pos_in_b_second > (varlen->len_b / 2))
+		if (pos_in_b_second > (varlen->len_b / 2) && pos_in_b_second > pos_second)
 		{
 printf(BLUE"ici ? pos_in_b_second = %d, varlen->len_b = %d, varlen->pos_second = %d, pos_second = %d"RESET"\n", pos_in_b_second, varlen->len_b, varlen->pos_second, pos_second);
-			ft_loop_revrotate_ab(s_a, s_b, varlen, pos_second);
-			varlen->count = pos_second;
+//			ft_loop_revrotate_ab(s_a, s_b, varlen, pos_second);
+//			varlen->count = pos_second;
+//			if (pos_in_b_second > pos_second)
+//			{
+				ft_loop_revrotate_ab(s_a, s_b, varlen, pos_second);
+//				pos_in_b_second = pos_in_b_second - pos_second;
+//				ft_loop_revrotate_a(s_a, varlen, pos_in_b_second);
+/*			}
+			else if (pos_in_b_second < pos_second)
+			{
+				ft_loop_revrotate_ab(s_a, s_b, varlen, pos_in_b_second);
+				pos_second = pos_second - pos_in_b_second;
+				ft_loop_revrotate_a(s_b, varlen, pos_second);
+			}*/
 		}
-		else
+		else // if (pos_in_b_second < (varlen->len_b / 2))
+//		{
+//			if (pos_in_b_second > pos_second)
+//		}
+//		else
 			ft_loop_revrotate_a(s_a, varlen, pos_second);
 	}
 	else if (varlen->pos_first == pos_second)
@@ -139,10 +155,11 @@ void	ft_loop_rotate_a(int *s_a, t_varlen *varlen, int x)
 void	ft_loop_rotate_ab(int *s_a, int *s_b, t_varlen *varlen, int x)
 {
 	int	i;
-
+//printf("loop_rotate_ab\n");
 	i = 0;
 	while (i < x)
 	{
+printf("loop_rotate_ab\n");
 		ft_rotate_ab(s_a, s_b, varlen);
 		i++;
 	}
@@ -228,6 +245,8 @@ printf(YELLOW"sort_b Ou alors ici..."RESET"\n");
 	}
 	return ;
 }*/
+
+////////////   ATTENTION pos_in_b !  ///////////////////////////
 
 void	ft_insert_in_b(int *s_a, int *s_b, t_varlen *varlen)
 {
@@ -317,7 +336,12 @@ printf(PURPLE"pos_in_b_min on entre ici ?"RESET"\n");
 			{
 printf(PURPLE"pos_in_b_min s_b[%d] = %d"RESET"\n", i, s_b[i]);
 				if (xa == varlen->min)
-					pos_in_b = i;
+				{
+					if (i == varlen->len_b - 1)
+						pos_in_b = i;
+					else
+						pos_in_b = i + 1; //if xa >=0
+				}
 				else
 					pos_in_b = i + 1;
 			}

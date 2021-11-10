@@ -6,7 +6,7 @@
 /*   By: iderighe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 11:29:56 by iderighe          #+#    #+#             */
-/*   Updated: 2021/11/04 13:33:33 by iderighe         ###   ########.fr       */
+/*   Updated: 2021/11/09 10:56:11 by iderighe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,12 @@ int	ft_create_index(int *s_a, int *s_b, t_varlen *varlen)
 	{
 		i = 0;
 		index = 0;
-		while (++i < varlen->len_a)
+//		while (++i < varlen->len_a)
+		while (i < varlen->len_a)
 		{
-//			i++;
 			if (s_a[j] > s_a[i])
-			{
-//printf(RED"s_a[%d] = %d, s_a[%d] = %d"RESET"\n", j, s_a[j], i, s_a[i]);
 				index++;
-			}
-//			i++;
+			i++;
 		}
 		index_sa[j] = index;
 		j++;
